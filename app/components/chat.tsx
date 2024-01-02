@@ -743,7 +743,7 @@ function _Chat() {
           const responseData = await response.json();
           if (responseData.code !== 200) {
             alert(responseData.message);
-            if (responseData.code == 904) {
+            if (responseData.code == 201800904) {
               goRegister();
             }
             return;

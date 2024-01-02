@@ -13,7 +13,7 @@ export async function requestOpenai(req: NextRequest) {
     "/api/openai/",
     "",
   );
-
+  console.log("openaiPath: ", openaiPath);
   let baseUrl = BASE_URL;
 
   if (!baseUrl.startsWith("http")) {

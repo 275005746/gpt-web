@@ -28,7 +28,7 @@ export class ChatGPTApi implements LLMApi {
   private disableListModels = true;
   path(path: string): string {
     let openaiUrl = useAccessStore.getState().openaiUrl;
-    console.log("openaiUrl: ",openaiUrl)
+    console.log("openaiUrl: ", openaiUrl);
     const apiPath = "/api/openai";
 
     if (openaiUrl.length === 0) {
@@ -41,7 +41,10 @@ export class ChatGPTApi implements LLMApi {
     if (!openaiUrl.startsWith("http") && !openaiUrl.startsWith(apiPath)) {
       openaiUrl = "https://" + openaiUrl;
     }
-    return [openaiUrl, path].join("/");
+    let url = [openaiUrl, path].join("/");
+    console.log("path: ", path);
+    console.log("url: ", url);
+    return url;
   }
 
   extractMessage(res: any) {
@@ -79,6 +82,7 @@ export class ChatGPTApi implements LLMApi {
     options.onController?.(controller);
 
     try {
+      console.log("this.path", useAccessStore.getState().openaiUrl);
       const chatPath = this.path(OpenaiPath.ChatPath);
       const chatPayload = {
         method: "POST",
@@ -109,6 +113,7 @@ export class ChatGPTApi implements LLMApi {
         fetchEventSource(chatPath, {
           ...chatPayload,
           async onopen(res) {
+            console.log("chatPath: ", chatPath);
             clearTimeout(requestTimeoutId);
             const contentType = res.headers.get("content-type");
             console.log(

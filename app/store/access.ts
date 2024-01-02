@@ -33,9 +33,9 @@ export interface AccessControlStore {
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
 
 const DEFAULT_OPENAI_URL = DEFAULT_API_HOST;
-  // getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
-console.log(getClientConfig())
-console.log(getClientConfig()?.buildMode)
+// getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
+console.log(getClientConfig());
+console.log(getClientConfig()?.buildMode);
 console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 
 export const useAccessStore = create<AccessControlStore>()(
@@ -71,6 +71,7 @@ export const useAccessStore = create<AccessControlStore>()(
         set(() => ({ token: token?.trim() }));
       },
       updateOpenAiUrl(url: string) {
+        console.log("url: ", url);
         set(() => ({ openaiUrl: url?.trim() }));
       },
       updateMidjourneyProxyUrl(midjourneyProxyUrl: string) {
